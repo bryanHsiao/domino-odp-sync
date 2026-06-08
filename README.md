@@ -5,6 +5,8 @@
 
 分別針對 **local NSF** 與 **server NSF** 兩種情境各測一次。
 
+🔗 **線上展示頁(GitHub Pages):** https://bryanhsiao.github.io/domino-odp-sync/ ｜ 前一版 console 設計:[`/console/`](https://bryanhsiao.github.io/domino-odp-sync/console/)
+
 ## 文件
 
 | 文件 | 內容 |

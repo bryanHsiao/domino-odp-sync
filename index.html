@@ -3,44 +3,98 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ODP WebContent Deploy Test [SERVER]</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <title>ODP Sync · Domino 來源控制部署實驗</title>
+  <meta name="description" content="驗證 HCL Domino Designer 自動匯入：外部改 ODP 檔案，重新整理一次，變更即回寫 NSF 並由伺服器服務。" />
+  <!-- 靜態頁（無 build step，需從 Domino / GitHub Pages 直接服務），故以 link 載入字體 CDN -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/index-e5f6a7b8.css" />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=general-sans@400,500,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
-  <div class="glow" aria-hidden="true"></div>
 
-  <main class="console">
-    <header class="topbar reveal" style="--d:0">
-      <span class="brand">
-        <img src="assets/img/logo-9f8e7d.svg" width="26" height="26" alt="" />
-        ODP·SYNC
-      </span>
-      <span class="status"><span class="status-dot"></span>DEPLOYED</span>
+  <div class="shell">
+    <header class="masthead reveal" style="--d:0">
+      <span class="wordmark">ODP <span class="slash">/</span> SYNC</span>
+      <a class="mast-link" href="https://github.com/bryanHsiao/domino-odp-sync">GitHub <span aria-hidden="true">↗</span></a>
     </header>
 
-    <section class="hero">
-      <p class="kicker reveal" style="--d:1">HCL DOMINO · ON-DISK PROJECT</p>
-      <h1 class="reveal" style="--d:2">ODP <span class="arrow">→</span> WebContent<br /><span class="zh">部署測試</span></h1>
-      <p class="lede reveal" style="--d:3">磁碟端打包產出，經 Designer 重新整理後自動匯入 NSF，由 Domino 直接服務。</p>
-    </section>
+    <main>
+      <section class="hero">
+        <p class="eyebrow reveal" style="--d:1">HCL Domino · 來源控制實驗</p>
+        <h1 class="reveal" style="--d:2">改磁碟，重新整理，<br />設計就回到 <span class="hl">NSF</span>。</h1>
+        <p class="standfirst reveal" style="--d:3">用外部工具改 ODP 檔案，在 Designer 重新整理一次，變更便自動匯入 NSF，並由伺服器即時服務。</p>
+        <a class="cta reveal" style="--d:4" href="https://github.com/bryanHsiao/domino-odp-sync/blob/main/docs/test-record.md">看測試記錄 <span aria-hidden="true">→</span></a>
+      </section>
 
-    <ol class="flow" aria-label="部署流程">
-      <li class="node reveal" style="--d:4;--i:0"><b class="n-idx">01</b><span class="n-label">磁碟檔</span><span class="n-sub">odp / WebContent</span></li>
-      <li class="node reveal" style="--d:5;--i:1"><b class="n-idx">02</b><span class="n-label">重新整理</span><span class="n-sub">Designer · F5</span></li>
-      <li class="node reveal" style="--d:6;--i:2"><b class="n-idx">03</b><span class="n-label">匯入 NSF</span><span class="n-sub">design element</span></li>
-      <li class="node node--end reveal" style="--d:7;--i:3"><b class="n-idx">04</b><span class="n-label">Server</span><span class="n-sub">Domino HTTP</span></li>
-    </ol>
+      <section class="steps">
+        <h2 class="sec-title">它怎麼運作</h2>
+        <ol class="flow">
+          <li class="step">
+            <b class="num">1</b>
+            <div class="step-body">
+              <h3>改磁碟檔</h3>
+              <p>外部編輯器寫入 ODP 資料夾裡的設計元素。</p>
+            </div>
+          </li>
+          <li class="step">
+            <b class="num">2</b>
+            <div class="step-body">
+              <h3>重新整理</h3>
+              <p>Designer 的工作區偵測到檔案系統變更。</p>
+            </div>
+          </li>
+          <li class="step">
+            <b class="num">3</b>
+            <div class="step-body">
+              <h3>匯入 NSF</h3>
+              <p>變更自動回寫成 NSF 內的設計元素。</p>
+            </div>
+          </li>
+          <li class="step is-end">
+            <b class="num">4</b>
+            <div class="step-body">
+              <h3>上線</h3>
+              <p>伺服器立即以新版設計對外服務。</p>
+            </div>
+          </li>
+        </ol>
+      </section>
 
-    <footer class="manifest reveal" style="--d:8">
-      <div class="env">環境標記 <b>SERVER</b></div>
-      <div id="stamp" class="marker">build marker: SYNC-TEST-WEBCONTENT-SERVER</div>
+      <section class="scenarios">
+        <h2 class="sec-title">兩種情境，行為一致</h2>
+        <div class="split">
+          <article class="case">
+            <span class="case-tag">Local NSF</span>
+            <p class="case-line">匯入成功,設計清單立即可見變更。</p>
+          </article>
+          <article class="case">
+            <span class="case-tag">Server NSF</span>
+            <p class="case-line">匯入成功,瀏覽器即時取得新版頁面。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="takeaway">
+        <p class="takeaway-text reveal-on-load">
+          自動匯入確實有效。<br />
+          它不是即時監看,<span class="hl">需要一次重新整理</span>來觸發。
+        </p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="foot-row">
+        <span class="foot-mark">ODP / SYNC</span>
+        <nav class="foot-nav">
+          <a href="https://github.com/bryanHsiao/domino-odp-sync">原始碼</a>
+          <a href="https://github.com/bryanHsiao/domino-odp-sync/blob/main/docs/test-record-2-webcontent.md">WebContent 部署</a>
+          <a href="console/">前一版 console 設計</a>
+        </nav>
+      </div>
     </footer>
-  </main>
-
-  <script type="module" src="assets/index-a1b2c3d4.js"></script>
+  </div>
 </body>
 </html>

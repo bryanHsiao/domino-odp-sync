@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ODP WebContent Deploy Test [SERVER]</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/index-e5f6a7b8.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+
+  <main class="console">
+    <header class="topbar reveal" style="--d:0">
+      <span class="brand">
+        <img src="assets/img/logo-9f8e7d.svg" width="26" height="26" alt="" />
+        ODP·SYNC
+      </span>
+      <span class="status"><span class="status-dot"></span>DEPLOYED</span>
+    </header>
+
+    <section class="hero">
+      <p class="kicker reveal" style="--d:1">HCL DOMINO · ON-DISK PROJECT</p>
+      <h1 class="reveal" style="--d:2">ODP <span class="arrow">→</span> WebContent<br /><span class="zh">部署測試</span></h1>
+      <p class="lede reveal" style="--d:3">磁碟端打包產出，經 Designer 重新整理後自動匯入 NSF，由 Domino 直接服務。</p>
+    </section>
+
+    <ol class="flow" aria-label="部署流程">
+      <li class="node reveal" style="--d:4;--i:0"><b class="n-idx">01</b><span class="n-label">磁碟檔</span><span class="n-sub">odp / WebContent</span></li>
+      <li class="node reveal" style="--d:5;--i:1"><b class="n-idx">02</b><span class="n-label">重新整理</span><span class="n-sub">Designer · F5</span></li>
+      <li class="node reveal" style="--d:6;--i:2"><b class="n-idx">03</b><span class="n-label">匯入 NSF</span><span class="n-sub">design element</span></li>
+      <li class="node node--end reveal" style="--d:7;--i:3"><b class="n-idx">04</b><span class="n-label">Server</span><span class="n-sub">Domino HTTP</span></li>
+    </ol>
+
+    <footer class="manifest reveal" style="--d:8">
+      <div class="env">環境標記 <b>SERVER</b></div>
+      <div id="stamp" class="marker">build marker: SYNC-TEST-WEBCONTENT-SERVER</div>
+    </footer>
+  </main>
+
+  <script type="module" src="assets/index-a1b2c3d4.js"></script>
+</body>
+</html>

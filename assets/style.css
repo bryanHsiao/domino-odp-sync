@@ -1,0 +1,156 @@
+/* ODP / SYNC : editorial engineering broadsheet
+   tokens: cool paper + ink + single cobalt accent (locked), dual-mode */
+:root{
+  --paper:#f2f1ea;
+  --raised:#f7f6f0;
+  --ink:#16150e;
+  --muted:#615f54;
+  --line:rgba(22,21,14,.14);
+  --accent:#1f3ae0;
+  --accent-soft:rgba(31,58,224,.12);
+  --display:"Clash Display",system-ui,sans-serif;
+  --sans:"General Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#121116;
+    --raised:#17161d;
+    --ink:#ecebe2;
+    --muted:#9a988b;
+    --line:rgba(236,235,226,.15);
+    --accent:#8298ff;
+    --accent-soft:rgba(130,152,255,.16);
+  }
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+  overflow-x:hidden;
+}
+.grain{
+  position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.4;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/></svg>");
+}
+@media (prefers-color-scheme:dark){.grain{mix-blend-mode:screen;opacity:.18}}
+
+.shell{max-width:1080px;margin:0 auto;padding:clamp(1.25rem,4vw,2.5rem)}
+a{color:inherit;text-decoration:none}
+
+/* ── masthead ── */
+.masthead{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.4rem 0 1.1rem;border-bottom:1px solid var(--line);
+}
+.wordmark{font-family:var(--mono);font-size:.82rem;letter-spacing:.22em;font-weight:500}
+.wordmark .slash{color:var(--accent);margin:0 .1em}
+.mast-link{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;color:var(--muted);
+  padding-bottom:2px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;
+}
+.mast-link:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ── hero / editorial manifesto ── */
+.hero{padding:clamp(3rem,11vh,6.5rem) 0 clamp(2.5rem,8vh,5rem)}
+.eyebrow{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.6rem;
+}
+h1{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(2.7rem,8.5vw,6rem);line-height:.98;letter-spacing:-.02em;
+  max-width:16ch;
+}
+h1 .hl{color:var(--accent)}
+.standfirst{
+  margin-top:1.7rem;max-width:46ch;color:var(--muted);
+  font-size:clamp(1.05rem,2.3vw,1.28rem);line-height:1.55;
+}
+.cta{
+  display:inline-flex;align-items:center;gap:.5rem;margin-top:2.4rem;
+  font-family:var(--mono);font-size:.86rem;letter-spacing:.04em;font-weight:500;
+  color:var(--paper);background:var(--accent);
+  padding:.85rem 1.4rem;border-radius:2px;
+  transition:transform .18s cubic-bezier(.2,.7,.2,1),filter .2s;
+}
+.cta span{transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+.cta:hover{filter:brightness(1.08)}
+.cta:hover span{transform:translateX(4px)}
+.cta:active{transform:translateY(1px)}
+
+/* ── section heading shared ── */
+.sec-title{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(1.5rem,3.4vw,2.1rem);letter-spacing:-.01em;
+  padding-top:clamp(2.5rem,7vh,4.5rem);margin-bottom:2.2rem;
+}
+
+/* ── steps / ordered process ── */
+.flow{list-style:none;border-top:1px solid var(--line)}
+.step{
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(1rem,4vw,3rem);align-items:baseline;
+  padding:1.7rem 0;border-bottom:1px solid var(--line);
+}
+.step .num{
+  font-family:var(--mono);font-weight:400;font-size:1rem;color:var(--accent);
+  font-variant-numeric:tabular-nums;padding-top:.35rem;
+}
+.step-body h3{font-family:var(--display);font-weight:500;font-size:1.45rem;letter-spacing:-.01em}
+.step-body p{color:var(--muted);margin-top:.3rem;max-width:42ch}
+.step.is-end h3{color:var(--accent)}
+
+/* ── scenarios / split ── */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line)}
+.case{padding:clamp(1.5rem,4vw,2.4rem);background:var(--raised)}
+.case + .case{border-left:1px solid var(--line)}
+.case-tag{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;color:var(--muted);
+  display:inline-block;margin-bottom:.9rem;
+}
+.case-line{font-family:var(--display);font-weight:500;font-size:clamp(1.2rem,2.6vw,1.6rem);line-height:1.25;letter-spacing:-.01em}
+
+/* ── takeaway band ── */
+.takeaway{padding:clamp(3.5rem,10vh,6rem) 0 clamp(2rem,5vh,3rem)}
+.takeaway-text{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(2rem,5.5vw,3.6rem);line-height:1.06;letter-spacing:-.02em;max-width:20ch;
+}
+.takeaway-text .hl{color:var(--accent)}
+
+/* ── footer ── */
+.foot{border-top:1px solid var(--line);padding:1.6rem 0 .5rem;margin-top:1rem}
+.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem}
+.foot-mark{font-family:var(--mono);font-size:.74rem;letter-spacing:.2em;color:var(--muted)}
+.foot-nav{display:flex;flex-wrap:wrap;gap:1.4rem}
+.foot-nav a{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--muted);
+  padding-bottom:2px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;
+}
+.foot-nav a:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ── motion: one orchestrated load reveal ── */
+.reveal,.reveal-on-load{
+  opacity:0;transform:translateY(16px);
+  animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards;
+  animation-delay:calc(var(--d,2) * 70ms + 120ms);
+}
+@keyframes rise{to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  .reveal,.reveal-on-load{animation:none;opacity:1;transform:none}
+  .cta,.cta span,.mast-link,.foot-nav a{transition:none}
+}
+
+/* ── mobile collapse ── */
+@media (max-width:680px){
+  .split{grid-template-columns:1fr}
+  .case + .case{border-left:none;border-top:1px solid var(--line)}
+  .foot-row{flex-direction:column;align-items:flex-start}
+}
