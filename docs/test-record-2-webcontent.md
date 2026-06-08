@@ -124,3 +124,36 @@ local 與 server 兩包內容相同，只有環境標記不同（`[LOCAL]` / `[S
 |------|------|------|------|--------|
 | 2026-06-09 01:34 | A: local | `odp-local/WebContent/app/` | 新增模擬打包產出（含巢狀 assets/img） | 4 |
 | 2026-06-09 01:34 | B: server | `odp-server/WebContent/app/` | 新增模擬打包產出（含巢狀 assets/img） | 4 |
+| 2026-06-09 02:17 | B: server | `odp-server/WebContent/app/` | 整頁重新設計，同時改 / 增 / 刪（見第 9 節） | +1 / -3 |
+
+---
+
+## 9. 追加驗證：整頁重新設計 + 「修改 / 新增 / 刪除」三種同步一次到位
+
+延續測試二，把首頁用另一套設計（編輯式報刊風）整個換掉，刻意在**同一次重新整理**裡製造三種檔案異動，驗證自動匯入對三者的行為。
+
+### 9.1 這次的檔案異動
+
+| 同步類型 | 檔案 | 動作 |
+|---|---|---|
+| **修改 (modify)** | `app/index.html` | 內容整頁換成新設計 |
+| **新增 (add)** | `app/assets/style.css` | 新樣式檔 |
+| **刪除 (delete)** | `app/assets/index-*.css`、`index-*.js`、`img/logo-*.svg` | 移除舊 console 版資產（3 檔） |
+
+### 9.2 結果（F5 後，server NSF）
+
+| 觀察項目 | 結果 |
+|----------|------|
+| 修改是否回寫 | ☑ 是 — 瀏覽器顯示新設計 |
+| 新增是否匯入 | ☑ 是 — `style.css` 正常載入套用 |
+| 刪除是否同步 | ☑ 是 — 舊 3 個資產從 NSF / 設計清單一併移除 |
+| 雙模式渲染 | ☑ 是 — 淺色 / 深色（`prefers-color-scheme`）皆正常 |
+| 瀏覽器存取 | ☑ `127.0.0.1/agentlog_odp-server.nsf/app/index.html` 正常 |
+
+### 9.3 小結
+
+- **修改、新增、刪除三種異動，在同一次 F5 重新整理裡都正確同步到 NSF。** 自動匯入不只處理「改 / 增」，連「刪」也會一併反映（本次實測）。
+- 整頁重新設計（換 HTML + 換 CSS + 移除舊資產）可比照同一招完成部署，server 端即時生效。
+- 驗證流程同前：唯一人工步驟是 Designer 重新整理（F5）。
+
+> 補充：本頁新設計同時發佈為 GitHub Pages（`https://bryanhsiao.github.io/domino-odp-sync/`），前一版 console 設計保留於 `/console/`。
