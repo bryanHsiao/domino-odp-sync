@@ -1,0 +1,8 @@
+# ODP 工作目錄（測試實驗用，不納入版控）
+odp-local/
+odp-server/
+
+# OS / 編輯器
+Thumbs.db
+.DS_Store
+.vscode/
